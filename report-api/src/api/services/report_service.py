@@ -70,11 +70,11 @@ class ReportService:
     @staticmethod
     def generate_pdf(html_out, generate_page_number: bool = False):
         """Generate pdf out of the html."""
-        html = HTML(string=html_out).render(optimize_size=('fonts', 'images',), cache=cache)
+        html = HTML(string=html_out).render(optimize_size=('fonts', 'images',))
         if generate_page_number:
             html = ReportService.populate_page_info(html)
         print(cache)
-        return html.write_pdf()
+        return html.write_pdf(image_cache=cache)
 
     @staticmethod
     def populate_page_info(html):
