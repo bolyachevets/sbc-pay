@@ -1,0 +1,624 @@
+<!DOCTYPE html><html lang="en">
+
+<head> <title>Results of Name Request</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="BC Registries and Online Services"> <style>
+        @page {
+            
+            /* if you change the margins, also update .header and .business-details-container */
+            margin: 2.2in 0.4in 0.65in 0.4in;
+             size: Letter;
+
+            @bottom-right {
+                font-family: 'BCSans-Regular', sans-serif !important;
+                font-size: 12px;
+                color: #003366;
+                margin-right: 5px;
+                margin-bottom: 10px;
+                margin-top: 15px;
+                content: string(filingIdentifier) "  |  Page " counter(page) " of " counter(pages);
+                
+            }
+
+             @bottom-left {
+                margin-bottom: 14px;
+                margin-top: 15px;
+                content: url('file:///app/sfile/footer.svg');
+                
+            }
+
+            
+        }
+
+        @font-face {
+            font-family: 'BCSans-Bold';
+            src: url('file:///app/sfile/2023_01_01_BCSans-Bold_2f.woff');
+            font-weight: normal;
+            font-style: normal;
+            
+        }
+
+        @font-face {
+            font-family: 'BCSans-Regular';
+            src: url('file:///app/sfile/2023_01_01_BCSans-Regular_2f.woff');
+            font-weight: normal;
+            font-style: normal;
+            
+        }
+
+        @font-face {
+            font-family: 'BCSans-Italic';
+            src: url('file:///app/sfile/2023_01_01_BCSans-Italic_2f.woff');
+            font-weight: normal;
+            font-style: normal;
+            
+        }
+
+        .header {
+            
+            /* NB: repeats on every page due to fixed position */
+            position: fixed;
+            top: -192px;
+            /* approx 2 in */
+            width: 98%;
+            
+        }
+
+        .header-table {
+            width: 100%;
+            
+        }
+
+        .report-type {
+            font-family: 'BCSans-Bold', sans-serif !important;
+            color: #234075;
+            font-size: 20px;
+            text-align: right;
+            
+        }
+
+        .report-type-desc {
+            font-family: 'BCSans-Regular', sans-serif !important;
+            color: #1A5A96;
+            font-size: 14px;
+            text-align: right;
+            
+        }
+
+        .business-name-header {
+            width: 100%;
+            background-color: #234075;
+            height: 38px;
+            padding-top: 0.875rem;
+            
+        }
+
+        .lbl-business-name {
+            padding-left: 1.5rem;
+            font-family: 'BCSans-Bold', sans-serif !important;
+            font-size: 16px;
+            color: white;
+            text-transform: capitalize;
+            
+        }
+
+        .section-header {
+            border-top: solid 2px #234075;
+            border-bottom: solid 2px #234075;
+            height: 33px;
+            font-family: 'BCSans-Bold', sans-serif !important;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1rem;
+            color: #234075;
+            
+        }
+
+        .container {
+            padding-left: 0.875rem;
+            padding-right: 0.875rem;
+            
+        }
+
+        .section-title {
+            font-family: 'BCSans-Bold', sans-serif !important;
+            color: #234075;
+            font-size: 14px;
+            text-align: left;
+            
+        }
+
+        .section-title-gray {
+            font-family: 'BCSans-Bold', sans-serif !important;
+            color: #313132;
+            font-size: 14px;
+            text-align: left;
+            
+        }
+
+        .section-sub-title {
+            font-family: 'BCSans-Bold', sans-serif !important;
+            color: #313132;
+            font-size: 13px;
+            text-align: left;
+            
+        }
+
+        .section-statement {
+            font-family: 'BCSans-Bold', sans-serif !important;
+            color: #234075;
+            font-size: 13px;
+            text-align: center;
+            
+        }
+
+        .section-data {
+            font-family: 'BCSans-Regular', sans-serif !important;
+            color: #313132;
+            font-size: 13px;
+            line-height: 15px;
+            text-align: left;
+            
+        }
+
+        .section-data-lg {
+            font-family: 'BCSans-Regular', sans-serif !important;
+            color: #313132;
+            font-size: 14px;
+            line-height: 15px;
+            text-align: left;
+            
+        }
+
+        .section-data-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            
+        }
+
+        .section-data-table td {
+            vertical-align: top;
+            overflow-wrap: break-word;
+             word-wrap: break-word;
+            
+        }
+
+        
+
+        /* vertical padding to upper border */
+        .section-data-table tr:not(:first-child) td {
+            padding-top: 0.25rem;
+            
+        }
+
+        
+
+        /* vertical padding to lower border */
+        .section-data-table tr:not(:last-child) td {
+            padding-bottom: 0.25rem;
+            
+        }
+
+        td.col-33 {
+            width: 33%;
+        }
+
+        td.col-67 {
+            width: 67%;
+        }
+
+        td.col-50 {
+            width: 50%;
+        }
+
+        .director-former-name {
+            font-family: 'BCSans-Italic', sans-serif !important;
+            font-size: 12px;
+            
+        }
+
+        .delivery-instructions {
+            font-family: 'BCSans-Italic', sans-serif !important;
+            font-size: 12px;
+            
+        }
+
+        .nr-name-table {
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            
+        }
+
+        .nr-name-table td {
+            vertical-align: top;
+            
+        }
+
+        .certify-statement-table,
+        .name-translation-table {
+            width: 100%;
+            padding-left: 1rem;
+            
+        }
+
+        .certify-statement-table td,
+        .name-translation-table td {
+            vertical-align: top;
+            
+        }
+
+        .certify-statement-table td:nth-child(1),
+        .name-translation-table td:nth-child(1) {
+            width: 20px;
+            
+        }
+
+        .nr-details-container {
+            width: 100%;
+            background-color: #E2E7ED;
+            vertical-align: middle;
+            text-align: center;
+            margin-top: -43px;
+            /* approx 0.45 in */
+            border-right: solid 1.21px #E2E7ED;
+            
+        }
+
+        .nr-details-table {
+            width: 100%;
+            font-family: 'BCSans-Regular', sans-serif !important;
+            color: #313132;
+            font-size: 13px;
+            line-height: 15px;
+            text-align: left;
+            padding: 1rem 1rem 1rem 1rem;
+            
+        }
+
+        .nr-details-table td {
+            vertical-align: top;
+            
+        }
+
+        .nr-details-table td:nth-child(1) {
+            width: 17%;
+            
+        }
+
+        .bold {
+            font-family: 'BCSans-Bold', sans-serif !important;
+            color: #313132;
+            
+        }
+
+        .column-logo {
+            display: inline-block;
+            text-align: center;
+            width: 110px;
+            height: 100px;
+            
+        }
+
+        .column-logo img {
+            width: 85%;
+            height: 85%;
+            
+        }
+
+        .registar-certify-section {
+            text-align: center;
+            
+        }
+
+        .certified-copy-text {
+            font-size: 11px;
+            color: #234075;
+            font-family: 'BCSans-Bold', sans-serif !important;
+            text-align: center
+        }
+
+        .doc-description,
+        .registrar-title {
+            font-size: 9px;
+            text-align: center;
+            line-height: 9px;
+            height: 10px;
+            
+        }
+
+        .registrar-signature img {
+            width: 64px;
+            height: 29px;
+            vertical-align: center;
+            
+        }
+
+        .registrar-name {
+            font-size: 9px;
+            font-family: 'BCSans-Bold', sans-serif !important;
+            text-align: center
+        }
+
+        .separator {
+            border-bottom: 2px solid #BCBEC5;
+            
+        }
+
+        .dashed-row-separator {
+            border-top: dashed 1px #BCBEC5;
+            
+        }
+
+        .solid-row-separator {
+            border-bottom: solid 0.5px #BCBEC5;
+            
+        }
+
+        .no-page-break {
+            page-break-inside: avoid;
+            
+        }
+
+        .series-name {
+            padding-left: 1rem;
+            font-size: 12px
+        }
+
+        .filing-identifier {
+            visibility: hidden;
+            string-set: filingIdentifier content()
+        }
+
+        .capitalize-text {
+            text-transform: capitalize;
+            
+        }
+
+        .uppercase-text {
+             text-transform: uppercase;
+            
+        }
+
+        .highlighted-blue-text {
+             color: #234075
+        }
+
+        .right-align {
+            text-align: right;
+            
+        }
+
+        td.top-align {
+            vertical-align: top;
+            
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem;
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem;
+        }
+
+        .mt-3 {
+            margin-top: 0.75rem;
+        }
+
+        .mt-4 {
+            margin-top: 1rem;
+        }
+
+        .mt-5 {
+            margin-top: 1.25rem;
+        }
+
+        .mt-6 {
+            margin-top: 1.5rem;
+        }
+
+        .mt-7 {
+            margin-top: 1.75rem;
+        }
+
+        .mt-8 {
+            margin-top: 2rem;
+        }
+
+        .pt-1 {
+            padding-top: 0.25rem;
+        }
+
+        .pt-2 {
+            padding-top: 0.5rem;
+        }
+
+        .pt-3 {
+            padding-top: 0.75rem;
+        }
+
+        .pt-4 {
+            padding-top: 1rem;
+        }
+
+        .pt-5 {
+            padding-top: 1.25rem;
+        }
+
+        .pt-6 {
+            padding-top: 1.5rem;
+        }
+
+        .pt-7 {
+            padding-top: 1.75rem;
+        }
+
+        .pt-8 {
+            padding-top: 2rem;
+        }
+
+        .chip {
+            font-size: 8px;
+            padding: 3px 5px;
+            background-color: #E2E7ED;
+            color: #313132;
+            border-radius: 2px;
+            margin: 0 1px;
+            text-transform: upper;
+            
+        }
+
+        a {
+             color: #1A5A96;
+            
+        }
+
+        .approved-name {
+             text-transform: uppercase;
+             color: #2D853E
+        }
+
+        .approved-name:before {
+             content: url('/app/sfile/approved.svg');
+            
+        }
+
+        .rejected-name {
+             text-transform: uppercase;
+             color: #D3272C;
+            
+        }
+
+        .rejected-name:before {
+             content: url('file:///app/sfile/rejected.svg');
+            
+        }
+
+        .submitted-name {
+             text-transform: uppercase;
+            
+        }
+
+        .decision-text {
+             color: #313132;
+             font-size: 12px;
+             margin-left: 1.7rem;
+             line-height: 16px;
+            
+        }
+
+        .support-contact-details {
+             color: #234075;
+             font-size: 12px;
+            
+        }
+
+        .support-contact-details a {
+             text-decoration: none
+        }
+
+         .checkbox-label {
+             padding-left: 0.25rem;
+            
+        }
+
+         .bold-text {
+             font-weight: bold;
+            
+        }
+
+         .contact-number {
+             margin-right: 0.5rem;
+            
+        }
+
+        
+    </style>
+</head>
+
+<body> <div class="header"> <table class="header-table" role="presentation"> <tr class="no-page-break"> <td>
+                    <div class="column-logo"> <img alt="logo" src='file:///app/sfile/logo.png'></div> </td>
+                <td> <div class="report-type"> RESULTS OF NAME REQUEST </div> <div class="report-type-desc">
+                        <span class="support-contact-details"> <a href={{service_url}} target="_blank"
+                                rel="noopener noreferrer">{{service_url}}</a> </span> </div> </td> </tr>
+        </table> <div class="business-name-header"> <label class="lbl-business-name"> Name Request <span
+                    class="uppercase-text">{{nrNum}}</span> </label> </div> </div> <div
+        class="nr-details-container"> <table class="nr-details-table" role="presentation"> <tr> <td
+                    class="col-10"> <div class="bold">Business Type:</div> <div class="bold pt-2">Request Type:
+                    </div> <div class="bold pt-2">Request Status:</div> <div class="bold pt-2">Submitted Date:</div>
+                     </td> <td> <div>{{entityTypeDescription}}</div> <div class="pt-2">{{ requestCodeDescription
+                        }}</div> <div class="bold pt-2">{{ nrStateDescription }}</div> <div class="pt-2">{{
+                        submittedDate }}</div> </td> </tr> </table></div>
+    <!-- this block is hidden but is needed for the footer: --><div class="filing-identifier"> Name Request
+        #{{nrNum}}</div> <table class="section-data section-data-table mt-4" role="presentation"> <tr
+            class="no-page-break"> <td class="col-33"> <div class="section-title-gray">Applicant Information</div>
+                <div class="section-data mt-2"> <span class="uppercase-text">{{ applicants.firstName }} </span> {%
+                    if applicants.middleName %} <span class="uppercase-text">{{ applicants.middleName }}</span> {%
+                    endif %} <span class="uppercase-text">{{ applicants.lastName }}</span> <div>{{
+                        applicants.addrLine1 }}</div> <div> <span class="captitalize-text">{{ applicants.city }}
+                        </span> <span>{{ applicants.stateProvinceCd }} </span> <span>{{ applicants.postalCd
+                            }}</span> </div> <div>{{ applicants.countryName }}</div> </div> </td> <td
+                class="col-33"> <div class="section-title-gray">Primary Contact</div> <div
+                    class="section-data mt-2"> {% if applicants.contact %} <div>{{ applicants.contact }}</div> {%
+                    endif %} <div>{{ applicants.emailAddress }}</div> {% if applicants.phoneNumber %} <div>{{
+                        applicants.phoneNumber }}</div> {% endif %} </div> </td> </tr></table> {% if stateCd
+    == 'CONDITIONAL' or stateCd == 'APPROVED' %} <div class="section-header mt-5 pt-4">APPROVAL DETAILS</div> {%
+    else %} <div class="section-header mt-5 pt-4">RESULT DETAILS</div> {% endif %} <div class="container pt-4">
+        {% if stateCd == 'REJECTED' %}<div> <div class="section-title">Your Name Request {{nrNum}} was not
+                approved for use.</div> {% if isXPRO %} <div class="section-data mt-4">Please contact BC Registry
+                staff to obtain an assumed name for an extraprovincial business: <div class="mt-4"> <span
+                        class="bold-text">Canada & U.S. Toll Free: </span> <span><a
+                            href="tel:1-877-370-1033">1-877-370-1033</a></span> </div> <div class="mt-1"> <span
+                        class="bold-text">Victoria Office: </span> <span><a
+                            href="tel:250-370-1033">250-370-1033</a></span> </div> <div class="mt-1"> <span
+                        class="bold-text">Email: </span> <span><a
+                            href="mailto:BCRegistries@gov.bc.ca">BCRegistries@gov.bc.ca</a></span> </div> </div>
+            {% else %} <div class="section-data mt-4">To submit another Name Request, visit <a href={{service_url}}
+                    target="_blank" rel="noopener noreferrer">{{service_url}}</a> </div> {% endif %}</div>{%
+        else %}<div> {% for choice in names %} {% if choice.state == 'CONDITION' or choice.state == 'APPROVED'
+            %} <div class="section-title"> <div> <span>Approved Name</span> {% if choice.choice == 1 %} <span
+                        class="section-data highlighted-blue-text">(1st Choice)</span> {% elif choice.choice == 2 %}
+                    <span class="section-data highlighted-blue-text">(2nd Choice)</span> {% elif choice.choice == 3
+                    %} <span class="section-data highlighted-blue-text">(3rd Choice)</span> {% endif %} <span>:
+                    </span> <span class="uppercase-text">{{choice.name}}</span> </div> <div>
+                    <span>Expires:</span> <span>{{ expirationDate }}</span> </div> </div> <div
+                class="separator mt-4"></div> <div class="section-data"> <div class="section-title-gray mt-4">ACTION
+                    REQUIRED:</div> </div> {% if choice.state == 'CONDITION' %} <div class="section-data mt-4">
+                 <span>{{ choice.decision_text }}. </span> {% if consentFlag in ['Y', 'R'] %} <span>Send your
+                    consent letter so registry staff can release the condition before you incorporate or register.
+                    Consent letters will be processed within two business days of receipt.</span>  {% endif %}
+            </div> {% endif %} {% endif %} {% endfor %}</div><div class="mt-4"> <form> {% if consentFlag
+                in ['Y', 'R'] %} <div> {% if consentFlag=='R' %} <img
+                        src="https://report-api-static-f2b77c-tools.apps.silver.devops.gov.bc.ca/consent-box.svg"> {%
+                    elif consentFlag=='Y' %} <img
+                        src="https://report-api-static-f2b77c-tools.apps.silver.devops.gov.bc.ca/consent-check.svg">
+                    {% endif %} <label for="consent-box" class="checkbox-label section-data mt-2"> Send in your
+                        consent letter to <a href="mailto:bcregistries@gov.bc.ca"
+                            class="pl-2">bcregistries@gov.bc.ca</a> </label> </div> {% endif %} <div
+                    class="section-data mt-4"> {% if consentFlag not in ['Y', 'R'] %} <span>Please complete the
+                        filing before the expiry date. </span> {% endif %} {% if consentFlag in ['Y', 'R'] %}
+                    <span>Once you have confirmation that your consent letter has been accepted, please complete the
+                        filing before the expiry date. </span> {% endif %} <span>If it is not used before it
+                        expires, a new name request will be required</span> </div> {% if nextAction %} <div
+                    class="{{ 'mt-2' if consentFlag in ['Y', 'R'] else '' }}"> <img
+                        src="https://report-api-static-f2b77c-tools.apps.silver.devops.gov.bc.ca/consent-box.svg,">
+                    <span class="checkbox-label section-data mt-2">{{ nextAction | safe }}</span> </div> {% endif
+                %} </form></div>{% endif %} {% if additionalInfo and additionalInfo != '' %} <div
+            class="no-page-break"> <div class="separator mt-4"></div> <div class="section-title-gray mt-4">
+                Additional Information</div> <div class="section-data mt-2">{{additionalInfo}}</div> </div> {%
+        endif %} </div> {% if stateCd != 'CONDITIONAL' and stateCd != 'APPROVED' %} <div
+        class="separator mt-4"></div><div class="section-title-gray mt-4">Submitted Name Choices:</div><table
+        class="section-data section-data-table mt-2" role="presentation"> {% for choice in names %} <tr
+            class="no-page-break"> <td class="col-33"> <div> <span
+                        class="{{ 'approved-name' if choice.state in ['APPROVED', 'CONDITION'] else 'rejected-name' if choice.state ==           'REJECTED' else 'submitted-name' }}">
+                        <span class="bold-text">{{ choice.choice }}. {{ choice.name }}</span> <span
+                            class="capitalize-text"> {% if choice.state == 'REJECTED' %} (Rejected) {% elif
+                            choice.state == 'APPROVED' %} (Approved) {% elif choice.state == 'CONDITION' %}
+                            (Conditional Approval) {% else %} (Not Reviewed) {% endif %} </span> </span> {%
+                    if choice.decision_text != '' %} <div class="section-data decision-text mt-1"> <span
+                            class="bold pt-2">Reason:</span> {{ choice.decision_text}} </div> {% endif %} </div>
+            </td> </tr> {% endfor %}</table> {% endif %} </body>
+
+</html>

@@ -24,6 +24,7 @@ from weasyprint.formatting_structure.boxes import InlineBox
 
 from api.utils.util import TEMPLATE_FOLDER_PATH
 
+
 def format_datetime(value, format='short'):  # pylint: disable=redefined-builtin
     """Filter to format datetime globally."""
     if format == 'full':
