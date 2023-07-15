@@ -15,9 +15,7 @@ USER root
 
 # install replication package
 RUN mkdir -p /opt/apps
-RUN apt-get -qq update
-RUN apt-get -qq install -y --no-install-recommends postgresql-$PG_MAJOR-pglogical
-RUN apt-get -qq clean
+RUN apk add --no-cache postgresql-$PG_MAJOR-pglogical
 
 # set time zone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
