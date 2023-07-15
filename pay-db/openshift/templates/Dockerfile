@@ -1,9 +1,9 @@
 ARG PG_MAJOR=12
 ARG PG_MINOR=11
 
-FROM quay.io/fedora/postgresql-$PG_MAJOR:$PG_MINOR
+FROM postgres:$PG_MAJOR.$PG_MINOR
 
-WORKDIR /
+USER root
 
 # read env variables
 ARG TZ=America/Vancouver
@@ -13,15 +13,15 @@ ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
 ENV PGDATA=/var/lib/pgsql/data
 
-USER root
-
 # install replication package
-RUN dnf install -y postgresql-$PG_MAJOR-pglogical
+RUN apt-get -qq update
+RUN apt-get -qq install -y --no-install-recommends postgresql-$PG_MAJOR-pglogical
+RUN apt-get -qq clean
 
 # set time zone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-USER 26
+USER 1001
 
 EXPOSE $PORT
 
