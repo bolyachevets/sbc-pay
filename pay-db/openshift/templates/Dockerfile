@@ -11,6 +11,8 @@ ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
 ENV PGDATA=/var/lib/pgsql/data
 
+USER root
+
 # install replication package
 RUN mkdir -p /opt/apps
 RUN apt-get -qq update
