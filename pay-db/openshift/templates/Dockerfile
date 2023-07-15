@@ -1,7 +1,7 @@
 ARG PG_MAJOR=12
 ARG PG_MINOR=11
 
-FROM postgres:$PG_MAJOR.$PG_MINOR
+FROM image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:d99bb8c63bbdbbfb1bd1a1f4e1a5f114dc5a0d972cdd9d27ca9e69c16cb98089
 
 # read env variables
 ARG TZ=America/Vancouver
@@ -19,15 +19,6 @@ RUN apt-get -qq clean
 
 # set time zone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-ENV RUNUSER postgres
-
-RUN set -ex; \
-    chown -R 0:0 /var/lib/pgsql ; \
-    chmod -R 775 /var/lib/pgsql ; \
-    mkdir -p /var/run ; \
-    chown -R 0:0 /var/run ; \
-    chmod -R 775 /var/run
 
 EXPOSE $PORT
 
