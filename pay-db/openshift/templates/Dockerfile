@@ -7,6 +7,8 @@ FROM postgres:$PG_MAJOR.$PG_MINOR
 ARG TZ=America/Vancouver
 
 ENV PORT=5432
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
 
 # install replication package
 RUN mkdir -p /opt/apps
