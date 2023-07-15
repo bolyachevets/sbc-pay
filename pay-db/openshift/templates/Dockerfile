@@ -27,7 +27,3 @@ RUN chown -R non-root-postgres-user:non-root-postgres-group /temp
 RUN chmod 777 /temp
 
 USER non-root-postgres
-
-EXPOSE $PORT
-
-CMD ["postgres"]
