@@ -1,7 +1,9 @@
 ARG PG_MAJOR=12
 ARG PG_MINOR=11
 
-FROM image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:d99bb8c63bbdbbfb1bd1a1f4e1a5f114dc5a0d972cdd9d27ca9e69c16cb98089
+FROM quay.io/fedora/postgresql-$PG_MAJOR:$PG_MINOR
+
+WORKDIR /
 
 # read env variables
 ARG TZ=America/Vancouver
@@ -14,11 +16,12 @@ ENV PGDATA=/var/lib/pgsql/data
 USER root
 
 # install replication package
-RUN mkdir -p /opt/apps
-RUN apk add --no-cache postgresql-$PG_MAJOR-pglogical
+RUN dnf install -y postgresql-$PG_MAJOR-pglogical
 
 # set time zone
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+USER 26
 
 EXPOSE $PORT
 
