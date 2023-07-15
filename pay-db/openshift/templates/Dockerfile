@@ -23,7 +23,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV RUNUSER postgres
 
 RUN set -ex; \
-    mkdir -p /var/lib/pgsql/data ; \
     chown -R 0:0 /var/lib/pgsql ; \
     chmod -R 775 /var/lib/pgsql ; \
     mkdir -p /var/run ; \
