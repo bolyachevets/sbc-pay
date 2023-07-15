@@ -9,6 +9,7 @@ ARG TZ=America/Vancouver
 ENV PORT=5432
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
+ENV PGDATA=/var/lib/pgsql/data
 
 # install replication package
 RUN mkdir -p /opt/apps
