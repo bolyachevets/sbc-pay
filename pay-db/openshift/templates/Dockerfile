@@ -5,9 +5,11 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha25
 
 USER root
 
+WORKDIR /tmp
+
 RUN curl https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
-RUN rpm -ivh pgdg-redhat-repo-latest.noarch.rpm
+RUN rpm -ivh /tmp/pgdg-redhat-repo-latest.noarch.rpm
 
 RUN yum install postgresql12-server postgresql12-contrib
 
