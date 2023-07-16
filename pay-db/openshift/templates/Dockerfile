@@ -5,6 +5,8 @@ FROM image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha25
 
 USER root
 
+RUN yum install postgresql12-server postgresql12-contrib
+
 RUN curl https://access.2ndquadrant.com/api/repository/dl/default/release/12/rpm | bash
 
 RUN yum install postgresql12-pglogical
